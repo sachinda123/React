@@ -224,3 +224,32 @@
   margin-top: 2rem;
   width: -webkit-fill-available;
 }
+.wish-list-menu {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.wish-list-img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px; /* Rounded border */
+  padding: 15px; /* Some padding */
+  width: 100px; /* Set a small width */
+  margin: 0.5rem;
+  background-color: #f2eeed;
+}
+
+.wish-list-img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.higlight:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+.selected-icon {
+  display: flex;
+  align-items: center;
+}
+.wish-list-title {
+  display: flex;
+}

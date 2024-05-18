@@ -1,45 +1,33 @@
-How to setup
+To set up the project, follow these steps:
 
-ensure you have running docker version on machine
+1. **Ensure Docker is Installed**: Make sure you have Docker installed and running on your machine.
 
-open project folder in terminal
+2. **Open Terminal**: Navigate to the project folder in your terminal.
 
-Run source .env
+3. **Load Environment Variables**: Run the command `source .env` to load environment variables.
 
-Run Docker-compose up -d
+4. **Start Docker Compose**: Execute `docker-compose up -d` to start the containers in detached mode.
 
-Run docker ps
-idenified id of wire-api-container container
+5. **Check Running Containers**: Confirm the containers are running by running `docker ps`.
 
-Run docker exec -it sh container ID
+6. **Access Container Shell**: Identify the ID of the `api-container` container from the previous step. Then run `docker exec -it <container ID> sh` to access the container shell.
 
-Inside of container Run npx sequelize-cli db:migrate
+7. **Run Database Migrations**: Inside the container, execute `npx sequelize-cli db:migrate` to run the database migrations.
 
-Run DB seed inside of container npx sequelize-cli db:seed:all
+8. **Seed Database**: Run `npx sequelize-cli db:seed:all` inside the container to seed the database with default user values.
 
-now you have created table and default user values insert to DB
+9. **Access PhpMyAdmin**: You can access PhpMyAdmin at http://localhost:44066. Use the username `root` and password `root` to log in.
 
-you will find phpmyadmin http://localhost:44065
+10. **Run Tests**: Execute `npm test` to run the test cases.
 
-User name and password will be root
+Note:
 
-Run npm test for run test case
+- All documents are located in the `document` folder, including the answer sheet and Postman collection.
+- Not all functions are covered by test cases; only samples are done.
+- User passwords are stored as plain text for testing purposes.
 
-Note
-All documents -> in document folder (answer sheet/ Postman collection etc)
-All funtcion not cover by test cases .Only sample done
-User password store as plain text due to testing purpose
+You can use the following credentials to log in:
 
-Below user avilable you will able to login
-
-User Role :- owner
-User name :- owner
-Password :- 123
-
-User Role :- managers
-User name :- managers
-Password :- 123
-
-User Role :- cashiers
-User name :- cashiers
-Password :- 123
+- **Owner**: Username: owner, Password: 123456
+- **Managers**: Username: managers, Password: 123456
+- **Cashiers**: Username: cashiers, Password: 123456

@@ -3,7 +3,7 @@
     "username": "root",
     "password": "root",
     "database": "wire",
-    "host": "wire-mysql",
+    "host": "api-mysql",
     "dialect": "mysql",
     "logging": false
   },
@@ -11,7 +11,7 @@
     "username": "root",
     "password": null,
     "database": "database_test",
-    "host": "wire-mysql",
+    "host": "api-mysql",
     "dialect": "mysql",
     "logging": false
   },
@@ -19,7 +19,7 @@
     "username": "root",
     "password": null,
     "database": "database_production",
-    "host": "wire-mysql",
+    "host": "api-mysql",
     "dialect": "mysql",
     "logging": false
   }

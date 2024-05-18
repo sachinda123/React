@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist"
+  },
+  "target": "es6", // or a more recent ecmascript version
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true,
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
