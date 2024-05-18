@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "4449474e-7a19-4d3d-97f6-a585e4818de1",
+		"name": "Wire",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7878628"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "user-role",
+						"value": "admin",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\":\"managers\",\n\"password\":\"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "medication add",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA3NzY2NDMyMywiaWF0IjoxNzExMDc3NjY0fQ.8AVBHlVa0aokYfCJlf8iU37mEhrepAIjTwYv6M4cntI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"name\":\"test\",\n      \"description\": \"ddddd\",\n      \"quantity\": 0\n     \n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/medication/create",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medication",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get medication all list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA3NzY2NDMyMywiaWF0IjoxNzExMDc3NjY0fQ.8AVBHlVa0aokYfCJlf8iU37mEhrepAIjTwYv6M4cntI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/medication/all",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medication",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete medication",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA3NzY2NDMyMywiaWF0IjoxNzExMDc3NjY0fQ.8AVBHlVa0aokYfCJlf8iU37mEhrepAIjTwYv6M4cntI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/medication/delete/36",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medication",
+						"delete",
+						"36"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "innactive record",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA4MDc3Nzk4NCwiaWF0IjoxNzExMDgwNzc3fQ.QYt-LNgVIEQew7R3K4SFKoX85bIvGUYbN6Wo2FPNT1A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/medication/innactive/37",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medication",
+						"innactive",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update record",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA4MDc3Nzk4NCwiaWF0IjoxNzExMDgwNzc3fQ.QYt-LNgVIEQew7R3K4SFKoX85bIvGUYbN6Wo2FPNT1A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"test1cccMMM\",\n      \"description\": \"dhhdhdd\",\n      \"quantity\": 10\n     \n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/medication/update/37",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medication",
+						"update",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA4MDc3Nzk4NCwiaWF0IjoxNzExMDgwNzc3fQ.QYt-LNgVIEQew7R3K4SFKoX85bIvGUYbN6Wo2FPNT1A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"firstName\":\"firstName1\",\n\"lastName\":\"lastName\",\n\"contactNumber\":\"contactNumber\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/customer/create",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all customer list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA4Mzk3NzQ5MCwiaWF0IjoxNzExMDgzOTc3fQ.4_Cy6gtTb2uEpBDNvhjVNz02TOjTmSFZtqWV7BXvvVc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/customer/all",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "innactivate customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidGltZSI6MTcxMTA5NDc4NzE5NCwiaWF0IjoxNzExMDk0Nzg3fQ.xXMiMbXFDYh0DnR3ev1b1xUNMYEQ2xHeXKhZpHqwMRM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/customer/innactive/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						"innactive",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGltZSI6MTcxMTA4Mzk3NzQ5MCwiaWF0IjoxNzExMDgzOTc3fQ.4_Cy6gtTb2uEpBDNvhjVNz02TOjTmSFZtqWV7BXvvVc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/customer/delete/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update customer records",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidGltZSI6MTcxMTA5MzY0NTYyOSwiaWF0IjoxNzExMDkzNjQ1fQ.9-bNEsg_IJ89e68AO7zfVdb-rNj4Y3mgcb3Sb81iieI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"firstName\":\"bandara \",\n\"lastName\":\"ddd\",\n\"contactNumber\":\"contactNumber\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/customer/update/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						"update",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidGltZSI6MTcxMTA5NDc4NzE5NCwiaWF0IjoxNzExMDk0Nzg3fQ.xXMiMbXFDYh0DnR3ev1b1xUNMYEQ2xHeXKhZpHqwMRM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/user/all",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

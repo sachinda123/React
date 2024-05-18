@@ -1,0 +1,52 @@
+version: "3.5"
+services:
+  wire-api-container:
+    container_name: wire-api-container
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/app
+    working_dir: /home/app
+    environment:
+      - DEBUG=Auth
+      - NODE_ENV=${NODE_ENV}
+    command: sh -c "npm install && nodemon -L ."
+    networks:
+      wire_default:
+  wire-mysql:
+    container_name: wire-mysql-container
+    image: mysql:5.7.42
+    restart: always
+    privileged: true
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DB}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}
+      - MYSQL_DB_HOST=${MYSQL_DB_HOST}
+      - MYSQL_DB_PORT=4406
+    ports:
+      - "4451:3306"
+    volumes:
+      - wire_sql_data:/var/lib/mysql
+    networks:
+      wire_default:
+  wirw-phpmyadmin:
+    container_name: wirw-phpmyadmin-container
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - PMA_HOST=wire-mysql
+    ports:
+      - "44065:80"
+    networks:
+      wire_default:
+volumes:
+  wire_sql_data:
+networks:
+  wire_default:
+    name: wire_default

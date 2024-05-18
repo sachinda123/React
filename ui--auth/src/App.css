@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+.login-container {
+  margin: 20px;
+}
+
+.error {
+  color: red;
+}
