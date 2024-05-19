@@ -30,7 +30,6 @@ router.post("/login", async (req, res) => {
 router.post("/signup", async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
-        console.log(isValidEmail(email));
         if (!email || !isValidEmail(email)) {
             return sendResponse(res, 400, { message: "Email not valied" }, true);
         }

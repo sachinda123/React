@@ -24,7 +24,6 @@ passport.use(new Strategy(jwtOptions, async (payload, done) => {
     if (user) {
         return done(null, {
             id: user.id,
-            userName: user.userName,
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
