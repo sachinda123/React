@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const { Op } = require("sequelize");
 module.exports = {
     create: async (data, model) => {
         try {
@@ -10,43 +11,24 @@ module.exports = {
             throw error;
         }
     },
-    getAll: async (model, offset, limit) => {
+    getAll: async (model) => {
         try {
-            const allRecords = await model.findAll({
-                limit: limit, // Limit to 10 records
-                offset: offset,
-            });
+            const allRecords = await model.findAll();
             return allRecords;
         }
         catch (error) {
             throw error;
         }
     },
-    update: async (id, newData, model) => {
+    deletebyIds: async (ids, model) => {
         try {
-            const record = await model.findByPk(id);
-            if (record) {
-                await record.update(newData);
-                return record;
-            }
-            else {
-                throw new Error("Record not found");
-            }
-        }
-        catch (error) {
-            throw error;
-        }
-    },
-    deletebyId: async (id, model) => {
-        try {
-            const record = await model.findByPk(id);
-            if (record) {
-                await record.destroy();
-                return true;
-            }
-            else {
-                throw new Error("Record not found");
-            }
+            const record = await model.destroy({
+                where: {
+                    id: {
+                        [Op.in]: ids,
+                    },
+                },
+            });
         }
         catch (error) {
             throw error;
@@ -54,6 +36,10 @@ module.exports = {
     },
     checkExist: async (condition, model) => {
         const record = await model.findOne(condition);
+        return record;
+    },
+    countExist: async (condition, model) => {
+        const record = await model.findAll(condition);
         return record;
     },
 };
