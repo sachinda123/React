@@ -2,24 +2,24 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "wire",
-    "host": "api-mysql",
+    "database": "movie",
+    "host": "mysql",
     "dialect": "mysql",
     "logging": false
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "api-mysql",
+    "password": "root",
+    "database": "movie",
+    "host": "mysql",
     "dialect": "mysql",
     "logging": false
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "api-mysql",
+    "password": "root",
+    "database": "movie",
+    "host": "mysql",
     "dialect": "mysql",
     "logging": false
   }

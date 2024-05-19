@@ -3,25 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const dataToInsert = [
       {
-        firstName: "owner",
-        lastName: "owner",
-        userName: "owner",
+        firstName: "test_user_first_name",
+        lastName: "test_user_last_name",
+        email: "test@gmail.com",
         password: "123456",
-        RoleId: 1,
-      },
-      {
-        firstName: "managers",
-        lastName: "managers",
-        userName: "managers",
-        password: "123456",
-        RoleId: 2,
-      },
-      {
-        firstName: "cashiers",
-        lastName: "cashiers",
-        userName: "cashiers",
-        password: "123456",
-        RoleId: 3,
       },
     ];
 
@@ -30,7 +15,7 @@ module.exports = {
         "Users",
         {
           where: {
-            userName: data.userName,
+            email: data.email,
           },
         },
         ["id"]
