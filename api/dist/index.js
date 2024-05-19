@@ -3,10 +3,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
+const cors = require("cors");
 const { models: { User, Role }, } = require("./models");
 const { Strategy, ExtractJwt } = passportJWT;
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: "my_key",
