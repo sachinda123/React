@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { imageApiUrl } from "../config/url.config";
 
 const MovieTable = ({ movieList, handleClick, getNameById }) => {
   const [movies, setMovies] = useState([]);
@@ -23,7 +24,7 @@ const MovieTable = ({ movieList, handleClick, getNameById }) => {
         {movies?.map((item, index) => (
           <tr key={index}>
             <th scope="col-2">
-              <img src={"https://image.tmdb.org/t/p/w200" + item.poster_path} alt="" width="100" height="100" className="container-image" />
+              <img src={imageApiUrl + "/w200" + item.poster_path} alt="" width="100" height="100" className="container-image" />
             </th>
             <th scope="col-4">{item.title}</th>
             <th scope="col-2">{item && item?.genre_ids && item?.genre_ids.length > 0 && getNameById(item?.genre_ids[0])}</th>

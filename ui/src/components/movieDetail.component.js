@@ -1,15 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleMovie } from "../actions/movieActions";
+import { getList } from "../actions/listActions";
+import { addListItem } from "../actions/listActions";
+import { imageApiUrl } from "../config/url.config";
 
 const MovieDetail = ({ id, handle }) => {
   const dispatch = useDispatch();
-  const movie = useSelector((state) => state.movies.movie);
-  const loading = useSelector((state) => state.movies.loading);
-  const error = useSelector((state) => state.movies.error);
+  const { movie, loading, error } = useSelector((state) => state.movies);
+  const { data } = useSelector((state) => state.list);
+  const [alradyInList, setAlradyInList] = useState(false);
+
   useEffect(() => {
     dispatch(getSingleMovie(id));
-  }, [dispatch, id]);
+    dispatch(getList());
+  }, [dispatch, id, data.length]);
+
+  useEffect(() => {
+    if (movie && data && data.length > 0) {
+      const result = data.find((item) => item["movieId"] === movie.id);
+      if (result) {
+        setAlradyInList(true);
+      }
+    }
+  }, [data.length, alradyInList]);
 
   const generateRating = (vote) => {
     const totalStars = 5;
@@ -42,6 +57,22 @@ const MovieDetail = ({ id, handle }) => {
       </p>
     );
   };
+
+  const confirmAddToWishList = () => {
+    dispatch(
+      addListItem({
+        movieId: movie.id,
+        movieData: {
+          title: movie.title,
+          genre: movie.genre,
+          poster_path: movie.poster_path,
+          release_date: movie.release_date,
+        },
+      })
+    );
+  };
+
+  console.log("alradyInList", alradyInList);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -53,7 +84,7 @@ const MovieDetail = ({ id, handle }) => {
         </button>
         {">"} {movie?.title}
         <div className="movie-detail-image">
-          <img src={"https://image.tmdb.org/t/p/original" + movie?.poster_path} alt="" />
+          <img src={imageApiUrl + "/original" + movie?.poster_path} alt="" />
         </div>
       </div>
       <div className="movie-detail-right">
@@ -62,10 +93,11 @@ const MovieDetail = ({ id, handle }) => {
           <div className="col-10">
             <h1>{new Date(movie?.release_date).getFullYear()}</h1>
           </div>
-          <div className="col-2">
-            <button className="wish-list-btn">
+          <div className="col-2 badge-add">
+            <button className="wish-list-btn" onClick={confirmAddToWishList}>
               <i className="bi bi-bookmark-fill"></i>
             </button>
+            {alradyInList ? <span className="badge bg-primary lbl">Click to Add</span> : <span className="badge bg-success lbl">Added</span>}
           </div>
         </div>
         <div className="genre-container">
