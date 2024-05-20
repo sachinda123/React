@@ -1,3 +1,5 @@
+import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE } from "../actions/listActions";
+
 const initialState = {
   loading: false,
   data: [],
@@ -6,20 +8,20 @@ const initialState = {
 
 const listReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_LIST_REQUEST":
+    case FETCH_LIST_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case "FETCH_LIST_SUCCESS":
+    case FETCH_LIST_SUCCESS:
       return {
         ...state,
         loading: false,
         data: action.payload,
         error: null,
       };
-    case "FETCH_LIST_FAILURE":
+    case FETCH_LIST_FAILURE:
       return {
         ...state,
         loading: false,

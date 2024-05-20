@@ -23,6 +23,7 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchButtonClicked, setSearchButtonClicked] = useState(false);
   const [selectedGenere, setSelectedGenere] = useState("");
+  const [logo, setLog] = useState(false);
 
   const { loading, movies, error } = useSelector((state) => state.movies);
   const list = useSelector((state) => state.list);
@@ -108,15 +109,13 @@ const Home = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log("list", list.data);
-
   return (
     <>
       <div className="main-menu">
         {user ? (
           <>
             <div>
-              <span class="badge  bg-success">Weclome :- {user}</span>
+              <span class="badge  bg-success">Weclome :- {user && JSON.parse(user).firstName}</span>
             </div>
             <div className="login-user">
               <button
@@ -135,6 +134,7 @@ const Home = () => {
                 class="bi bi-person-circle fs-3"
                 onClick={() => {
                   dispatch(logout());
+                  setLog(!logo);
                 }}
               ></i>
             </div>

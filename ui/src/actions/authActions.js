@@ -1,6 +1,11 @@
 import axios from "axios";
+import { API_URL } from "../config/url.config";
 
-const API_URL = "http://localhost:3001/";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGOUT = "LOGOUT";
+export const ERROR_RESET = "ERROR_RESET";
+
 export const login = (email, password) => async (dispatch) => {
   try {
     const response = await axios.post(API_URL + "auth/login", { email, password });

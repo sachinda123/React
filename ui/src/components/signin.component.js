@@ -5,62 +5,44 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { login, clearMsg } from "../actions/authActions";
-
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+import { signup } from "../actions/signupActions";
 
 const Signin = () => {
-  const form = useRef();
-  const checkBtn = useRef();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isLoggedIn, error } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
+  const form = useRef();
+  const checkBtn = useRef();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [localError, setLocalError] = useState("");
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    if (error) {
-      dispatch(clearMsg());
-    }
-    setUsername(username);
-  };
-
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-
-    if (error) {
-      dispatch(clearMsg());
-    }
-    setPassword(password);
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
+  const handlesignin = (e) => {
     setLoading(true);
-
-    form.current.validateAll();
-
-    if (checkBtn.current.context._errors.length === 0) {
-      dispatch(login(username, password))
-        .then(() => {
-          setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-    } else {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setLocalError("Password mismatch");
       setLoading(false);
     }
+    dispatch(signup(firstName, lastName, email, password));
+
+    console.log("handlesignin");
+    // setLoading(true);
+    // form.current.validateAll();
+    // if (checkBtn.current.context._errors.length === 0) {
+    //   dispatch(login(username, password))
+    //     .then(() => {
+    //       setLoading(false);
+    //     })
+    //     .catch(() => {
+    //       setLoading(false);
+    //     });
+    // } else {
+    //   setLoading(false);
+    // }
   };
   if (isLoggedIn) {
     return <Navigate to="/" />;
@@ -71,43 +53,106 @@ const Signin = () => {
       <div className="form-group">
         <label htmlFor="username">Sign Up </label>
       </div>
-      <Form onSubmit={handleLogin} ref={form}>
+      <Form onSubmit={handlesignin} ref={form}>
         <div className="form-group">
-          <label htmlFor="username">First Name</label>
-          <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]} />
+          <label htmlFor="firstname">First Name</label>
+          <Input
+            type="text"
+            className="form-control"
+            name="firstname"
+            value={firstName}
+            required
+            onChange={(e) => {
+              setFirstName(e.target.value);
+              if (localError) {
+                setLocalError("");
+              }
+            }}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="username">Last Name</label>
-          <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]} />
+          <Input
+            type="text"
+            className="form-control"
+            name="lastName"
+            value={lastName}
+            onChange={(e) => {
+              setLastName(e.target.value);
+              if (localError) {
+                setLocalError("");
+              }
+            }}
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="username">Email</label>
-          <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]} />
+          <Input
+            type="email"
+            className="form-control"
+            name="email"
+            value={email}
+            required
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (localError) {
+                setLocalError("");
+              }
+            }}
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <Input type="password" className="form-control" name="password" value={password} onChange={onChangePassword} validations={[required]} />
+          <Input
+            type="password"
+            className="form-control"
+            name="password"
+            required
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (localError) {
+                setLocalError("");
+              }
+            }}
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="password">Confirm Password</label>
-          <Input type="password" className="form-control" name="password" value={password} onChange={onChangePassword} validations={[required]} />
+          <Input
+            type="password"
+            className="form-control"
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+              if (localError) {
+                setLocalError("");
+              }
+            }}
+          />
         </div>
 
         <div className="form-group">
-          <button className="btn btn-secondary btn-block signbtn">
-            <span>Sign Up</span>
+          <button className="btn btn-secondary btn-block signbtn" disabled={loading ? true : false}>
+            {loading ? (
+              <div className="spinner-border text-dark" role="status">
+                <span className="sr-only"></span>
+              </div>
+            ) : (
+              <span>Sign Up</span>
+            )}
           </button>
         </div>
 
-        {error && (
-          <div className="form-group">
-            <div className="alert alert-danger" role="alert">
-              {error.message}
-            </div>
-          </div>
+        {(error || localError) && (
+          <span class="badge bg-danger">
+            {error?.message}
+            {localError}
+          </span>
         )}
 
         <CheckButton style={{ display: "none" }} ref={checkBtn} />
