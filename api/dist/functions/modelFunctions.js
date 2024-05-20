@@ -29,6 +29,7 @@ module.exports = {
                     },
                 },
             });
+            return;
         }
         catch (error) {
             throw error;

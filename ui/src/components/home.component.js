@@ -32,7 +32,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchMovies(pageId));
     dispatch(getList());
-  }, [dispatch, pageId]);
+  }, [dispatch, pageId, list.length]);
 
   useEffect(() => {
     let filtered = movies;
@@ -115,7 +115,7 @@ const Home = () => {
         {user ? (
           <>
             <div>
-              <span class="badge  bg-success">Weclome :- {user && JSON.parse(user).firstName}</span>
+              <span className="badge  bg-success">Weclome :- {user && JSON.parse(user).firstName}</span>
             </div>
             <div className="login-user">
               <button
@@ -131,7 +131,7 @@ const Home = () => {
                 </span>
               </button>
               <i
-                class="bi bi-person-circle fs-3"
+                className="bi bi-person-circle fs-3"
                 onClick={() => {
                   dispatch(logout());
                   setLog(!logo);
@@ -147,7 +147,7 @@ const Home = () => {
               }}
               className="rounded-button"
             >
-              Login <i class="bi bi-person-fill-exclamation fs-3"></i>
+              Login <i className="bi bi-person-fill-exclamation fs-3"></i>
             </button>
           </div>
         )}

@@ -3,6 +3,8 @@ import { API_URL } from "../config/url.config";
 export const FETCH_LIST_REQUEST = "FETCH_LIST_REQUEST";
 export const FETCH_LIST_SUCCESS = "FETCH_LIST_SUCCESS";
 export const FETCH_LIST_FAILURE = "FETCH_LIST_FAILURE";
+export const FETCH_LIST_ADD_SUCCESS = "FETCH_LIST_ADD_SUCCESS";
+export const FETCH_LIST_RESET_ERROR = "FETCH_LIST_RESET_ERROR";
 
 export const getAxioInstance = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -55,11 +57,19 @@ export const deleteList = (list) => async (dispatch) => {
 
 export const addListItem = (Item) => async (dispatch) => {
   try {
+    dispatch({ type: FETCH_LIST_REQUEST, payload: null });
     const axioInstance = getAxioInstance();
     if (axioInstance) {
       await axioInstance.post(API_URL + "list/", Item);
     }
+    dispatch({ type: FETCH_LIST_ADD_SUCCESS, payload: null });
   } catch (error) {
     console.log("error", error.response.data);
+
+    dispatch({ type: FETCH_LIST_FAILURE, payload: error.response.data });
   }
+};
+
+export const errorReset = () => async (dispatch) => {
+  dispatch({ type: FETCH_LIST_RESET_ERROR, payload: null });
 };

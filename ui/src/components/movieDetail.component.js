@@ -3,28 +3,19 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleMovie } from "../actions/movieActions";
 import { getList } from "../actions/listActions";
-import { addListItem } from "../actions/listActions";
+import { addListItem, errorReset } from "../actions/listActions";
 import { imageApiUrl } from "../config/url.config";
 
 const MovieDetail = ({ id, handle }) => {
   const dispatch = useDispatch();
   const { movie, loading, error } = useSelector((state) => state.movies);
-  const { data } = useSelector((state) => state.list);
-  const [alradyInList, setAlradyInList] = useState(false);
+  const { error: listError, successfully_add } = useSelector((state) => state.list);
 
   useEffect(() => {
     dispatch(getSingleMovie(id));
     dispatch(getList());
-  }, [dispatch, id, data.length]);
-
-  useEffect(() => {
-    if (movie && data && data.length > 0) {
-      const result = data.find((item) => item["movieId"] === movie.id);
-      if (result) {
-        setAlradyInList(true);
-      }
-    }
-  }, [data.length, alradyInList]);
+    dispatch(errorReset());
+  }, [dispatch, id]);
 
   const generateRating = (vote) => {
     const totalStars = 5;
@@ -57,7 +48,6 @@ const MovieDetail = ({ id, handle }) => {
       </p>
     );
   };
-
   const confirmAddToWishList = () => {
     dispatch(
       addListItem({
@@ -72,7 +62,10 @@ const MovieDetail = ({ id, handle }) => {
     );
   };
 
-  // console.log("alradyInList", alradyInList);
+  useEffect(() => {
+    dispatch(getList());
+  }, [successfully_add]);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -97,7 +90,8 @@ const MovieDetail = ({ id, handle }) => {
             <button className="wish-list-btn" onClick={confirmAddToWishList}>
               <i className="bi bi-bookmark-fill"></i>
             </button>
-            {alradyInList ? <span className="badge bg-primary lbl">Click to Add</span> : <span className="badge bg-success lbl">Added</span>}
+            {listError && <span className="badge bg-success lbl">{listError && listError.message}</span>}
+            {successfully_add && <span className="badge bg-success lbl">successfuly added</span>}
           </div>
         </div>
         <div className="genre-container">

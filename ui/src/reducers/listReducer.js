@@ -1,9 +1,10 @@
-import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE } from "../actions/listActions";
+import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE, FETCH_LIST_ADD_SUCCESS, FETCH_LIST_RESET_ERROR } from "../actions/listActions";
 
 const initialState = {
   loading: false,
   data: [],
   error: null,
+  successfully_add: false,
 };
 
 const listReducer = (state = initialState, action) => {
@@ -25,8 +26,18 @@ const listReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: [],
         error: action.payload,
+      };
+    case FETCH_LIST_ADD_SUCCESS:
+      return {
+        ...state,
+        successfully_add: true,
+      };
+    case FETCH_LIST_RESET_ERROR:
+      return {
+        ...state,
+        error: null,
+        successfully_add: false,
       };
     default:
       return state;
