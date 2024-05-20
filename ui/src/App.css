@@ -254,11 +254,8 @@
 .button-selected {
   background-color: #000;
   color: #ddd;
-  /* font-size: 0.9rem; */
 }
-.bi-trash3 {
-  background-color: #4caf50;
-}
+
 .badge-add {
   display: flex;
   flex-direction: column;
@@ -289,4 +286,9 @@
 }
 .login-user {
   display: flex;
+}
+.dtl-img {
+  width: 20rem;
+  height: 30rem;
+  object-fit: contain;
 }

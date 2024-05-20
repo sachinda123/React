@@ -21,17 +21,17 @@ const WishList = () => {
   }, [data.length, selectedList.length]);
 
   const generateGenre = (genere) => {
-    console.log("genere", genere);
     return (
       <p className="genre">
-        {/* {ids?.map((id, index) => {
-          const { name } = genres.find((genre) => genre.id === id);
-          if (ids.length - 1 == index) {
-            return name;
+        {genere?.map((gener, index) => {
+          if (index === 0) {
+            return "  -  " + gener.name;
+          } else if (genere.length - 1 == index) {
+            return gener.name;
           } else {
-            return name + "/";
+            return gener.name + "/";
           }
-        })} */}
+        })}
       </p>
     );
   };
@@ -44,8 +44,8 @@ const WishList = () => {
     }
   };
 
-  const handleDeleteMultiple = () => {
-    dispatch(deleteList(selectedList));
+  const handleDeleteMultiple = (list) => {
+    dispatch(deleteList(list));
     dispatch(getList());
   };
 
@@ -66,7 +66,7 @@ const WishList = () => {
           </button>
           {">"} Wish List
         </div>
-        <button className={`rounded-button${selectedList.length > 0 ? " button-selected" : ""}`} onClick={() => handleDeleteMultiple()}>
+        <button className={`rounded-button${selectedList.length > 0 ? " button-selected" : ""}`} onClick={() => handleDeleteMultiple(selectedList)} disabled={selectedList.length == 0 ? true : false}>
           Remove selected
         </button>
       </div>
@@ -84,10 +84,12 @@ const WishList = () => {
             <img src={imageApiUrl + "/w200" + movieData.poster_path} alt="" className="wish-list-img" />
           </div>
           <div className="col-8 wish-list-title">
-            {movieData.title} {new Date(movieData?.release_date).getFullYear()} {generateGenre(movieData)}
+            {movieData.title} {new Date(movieData?.release_date).getFullYear()} {generateGenre(movieData?.genres || [])}
           </div>
           <div className="col-1 selected-icon">
-            <i className="bi bi-trash3"></i>
+            <div class="rounded-circle bg-primary p-2">
+              <i className="bi bi-trash3 " onClick={() => handleDeleteMultiple([movieId])}></i>
+            </div>
           </div>
         </div>
       ))}

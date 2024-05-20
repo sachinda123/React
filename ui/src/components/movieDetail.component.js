@@ -10,6 +10,7 @@ const MovieDetail = ({ id, handle }) => {
   const dispatch = useDispatch();
   const { movie, loading, error } = useSelector((state) => state.movies);
   const { error: listError, successfully_add } = useSelector((state) => state.list);
+  const loginUser = localStorage.getItem("user");
 
   useEffect(() => {
     dispatch(getSingleMovie(id));
@@ -49,17 +50,20 @@ const MovieDetail = ({ id, handle }) => {
     );
   };
   const confirmAddToWishList = () => {
+    // if (loginUser) {
     dispatch(
       addListItem({
         movieId: movie.id,
         movieData: {
           title: movie.title,
-          genre: movie.genre,
+          genres: movie.genres,
           poster_path: movie.poster_path,
           release_date: movie.release_date,
         },
       })
     );
+    // } else {
+    // }
   };
 
   useEffect(() => {
@@ -77,7 +81,7 @@ const MovieDetail = ({ id, handle }) => {
         </button>
         {">"} {movie?.title}
         <div className="movie-detail-image">
-          <img src={imageApiUrl + "/original" + movie?.poster_path} alt="" />
+          <img src={imageApiUrl + "/original" + movie?.poster_path} alt="" className="dtl-img" />
         </div>
       </div>
       <div className="movie-detail-right">
@@ -87,9 +91,10 @@ const MovieDetail = ({ id, handle }) => {
             <h1>{new Date(movie?.release_date).getFullYear()}</h1>
           </div>
           <div className="col-2 badge-add">
-            <button className="wish-list-btn" onClick={confirmAddToWishList}>
+            <button className="wish-list-btn" onClick={confirmAddToWishList} disabled={!loginUser ? true : ""}>
               <i className="bi bi-bookmark-fill"></i>
             </button>
+            {!loginUser && <span className="badge bg-info">log before add </span>}
             {listError && <span className="badge bg-success lbl">{listError && listError.message}</span>}
             {successfully_add && <span className="badge bg-success lbl">successfuly added</span>}
           </div>
