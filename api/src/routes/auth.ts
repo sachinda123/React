@@ -20,11 +20,18 @@ interface SignUpData {
 router.post("/login", async (req: TypedRequestBody<{ email: string; password: string }>, res: Response) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { [Op.and]: [{ email: email }, { password: password }] } });
+    const user = await User.findOne({
+      where: {
+        [Op.and]: [{ email: email }, { password: password }],
+      },
+      attributes: ["id", "firstName", "lastName", "email"], // Specify the fields you want to retrieve
+      raw: true,
+    });
     if (user) {
       const time = Date.now();
       const token = jwt.sign({ id: user.id, time: time }, "my_key");
-      return sendResponse(res, 200, { token }, true);
+
+      return sendResponse(res, 200, { ...user, token }, true);
     } else {
       return sendResponse(res, 401, { message: "Invalid username or password" }, true);
     }

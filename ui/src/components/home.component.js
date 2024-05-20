@@ -100,16 +100,16 @@ const Home = () => {
 
   return (
     <>
-      <nav class="navbar navbar-light bg-light">
+      <nav className="navbar navbar-light bg-light">
         {/* <a class="navbar-brand" href="#">
           Navbar
         </a> */}
         <div>
           <a href="/login">Lovin</a>
 
-          <i class="bi bi-bookmark-fill"></i>
-          <i class="bi bi-person-circle"></i>
-          <i class="bi bi-box-arrow-right"></i>
+          <i className="bi bi-bookmark-fill"></i>
+          <i className="bi bi-person-circle"></i>
+          <i className="bi bi-box-arrow-right"></i>
         </div>
       </nav>
       <div className="container">

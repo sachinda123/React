@@ -189,10 +189,7 @@
 .navigation {
   width: 4rem;
 }
-.middle {
-  /* border-left: none; */
-  /* border-right: none; */
-}
+
 .line {
   width: 100%;
   height: 1px;
@@ -252,4 +249,12 @@
 }
 .wish-list-title {
   display: flex;
+}
+.button-selected {
+  background-color: #000;
+  color: #ddd;
+  /* font-size: 0.9rem; */
+}
+.bi-trash3 {
+  background-color: #4caf50;
 }
