@@ -72,7 +72,7 @@ const MovieDetail = ({ id, handle }) => {
     );
   };
 
-  console.log("alradyInList", alradyInList);
+  // console.log("alradyInList", alradyInList);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 

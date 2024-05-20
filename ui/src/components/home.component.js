@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import MovieDetail from "../components/movieDetail.component";
 import MovieTable from "./movietable.component";
 import Menu from "./menu.component";
-import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies } from "../actions/movieActions";
 import genres from "../config/genres.config";
+import { getList } from "../actions/listActions";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [movieId, setMovieId] = useState("");
   const [pageId, setPageId] = useState(1);
-  const { loading, movies, error } = useSelector((state) => state.movies);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
@@ -19,9 +23,16 @@ const Home = () => {
   const [searchButtonClicked, setSearchButtonClicked] = useState(false);
   const [selectedGenere, setSelectedGenere] = useState("");
 
+  const { loading, movies, error } = useSelector((state) => state.movies);
+  const { data } = useSelector((state) => state.list);
+  const user = localStorage.getItem("user");
+
+  console.log("loginUser", user);
+
   useEffect(() => {
     dispatch(fetchMovies(pageId));
-  }, [dispatch, pageId]);
+    dispatch(getList());
+  }, [dispatch, pageId, data.length]);
 
   useEffect(() => {
     let filtered = movies;
@@ -100,18 +111,22 @@ const Home = () => {
 
   return (
     <>
-      <nav className="navbar navbar-light bg-light">
-        {/* <a class="navbar-brand" href="#">
-          Navbar
-        </a> */}
+      <div className="main-menu">
         <div>
-          <a href="/login">Lovin</a>
-
-          <i className="bi bi-bookmark-fill"></i>
-          <i className="bi bi-person-circle"></i>
-          <i className="bi bi-box-arrow-right"></i>
+          <button
+            className="btn btn-outline-primary position-relative notification-btn"
+            onClick={() => {
+              return navigate(`/list`);
+            }}
+          >
+            <i className="bi bi-bookmark-fill me-1 fs-3"></i>
+            <span className="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
+              {data.length}
+              <span className="visually-hidden"></span>
+            </span>
+          </button>
         </div>
-      </nav>
+      </div>
       <div className="container">
         {!movieId ? (
           <>

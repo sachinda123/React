@@ -6,7 +6,6 @@ import { imageApiUrl } from "../config/url.config";
 
 const WishList = () => {
   const dispatch = useDispatch();
-  // const history = useHistory();
   const navigate = useNavigate();
 
   const { loading, data, error } = useSelector((state) => state.list);

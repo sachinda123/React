@@ -268,3 +268,18 @@
 .lbl {
   margin-top: 1rem;
 }
+.main-menu {
+  background-color: #ededed;
+  margin-bottom: 1rem;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4rem;
+}
+.notification-btn {
+  border: unset !important;
+}
+.main-menu .btn {
+  --bs-btn-padding-x: -0.25rem !important;
+}
