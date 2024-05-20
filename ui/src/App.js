@@ -1,5 +1,6 @@
 import "./App.css";
 import Login from "./components/login.component";
+import Signin from "./components/signin.component";
 import Home from "./components/home.component";
 import WishList from "./components/wishList.component";
 import { Routes, Route } from "react-router-dom";
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/list" element={<WishList />} />
+        <Route path="/signin" element={<Signin />} />
       </Routes>
     </div>
   );

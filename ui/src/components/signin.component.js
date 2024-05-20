@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -18,8 +17,7 @@ const required = (value) => {
   }
 };
 
-const Login = () => {
-  const navigate = useNavigate();
+const Signin = () => {
   const form = useRef();
   const checkBtn = useRef();
   const [username, setUsername] = useState("");
@@ -71,50 +69,51 @@ const Login = () => {
   return (
     <div className="card card-container login">
       <div className="form-group">
-        <label htmlFor="username">Login</label>
+        <label htmlFor="username">Sign Up </label>
       </div>
       <Form onSubmit={handleLogin} ref={form}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">First Name</label>
           <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]} />
         </div>
+        <div className="form-group">
+          <label htmlFor="username">Last Name</label>
+          <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="username">Email</label>
+          <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]} />
+        </div>
+
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <Input type="password" className="form-control" name="password" value={password} onChange={onChangePassword} validations={[required]} />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Confirm Password</label>
+          <Input type="password" className="form-control" name="password" value={password} onChange={onChangePassword} validations={[required]} />
+        </div>
+
         <div className="form-group">
           <button className="btn btn-secondary btn-block signbtn">
-            {loading && <span className="spinner-border spinner-border-sm"></span>}
-            <span>Login</span>
-          </button>
-        </div>
-        <div className="form-group">
-          {error && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {error.message}
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="form-group flexBox">
-          <div className="line"></div> <div className="signtext">What new ? </div>
-          <div className="line"></div>
-        </div>
-        <div className="form-group">
-          <button
-            className="btn btn-secondary btn-block signbtn"
-            onClick={() => {
-              return navigate(`/signin`);
-            }}
-          >
             <span>Sign Up</span>
           </button>
         </div>
+
+        {error && (
+          <div className="form-group">
+            <div className="alert alert-danger" role="alert">
+              {error.message}
+            </div>
+          </div>
+        )}
+
         <CheckButton style={{ display: "none" }} ref={checkBtn} />
       </Form>
     </div>
   );
 };
 
-export default Login;
+export default Signin;

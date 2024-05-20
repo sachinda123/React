@@ -283,3 +283,10 @@
 .main-menu .btn {
   --bs-btn-padding-x: -0.25rem !important;
 }
+
+.login {
+  margin-top: 15%;
+}
+.login-user {
+  display: flex;
+}
