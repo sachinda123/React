@@ -8,15 +8,15 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { login, clearMsg } from "../actions/authActions";
 
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+// const required = (value) => {
+//   if (!value) {
+//     return (
+//       <div className="alert alert-danger" role="alert">
+//         This field is required!
+//       </div>
+//     );
+//   }
+// };
 
 const Login = () => {
   const navigate = useNavigate();
@@ -76,27 +76,24 @@ const Login = () => {
       <Form onSubmit={handleLogin} ref={form}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
-          <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]} />
+          <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} required />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <Input type="password" className="form-control" name="password" value={password} onChange={onChangePassword} validations={[required]} />
+          <Input type="password" className="form-control" name="password" value={password} onChange={onChangePassword} required />
         </div>
         <div className="form-group">
-          <button className="btn btn-secondary btn-block signbtn">
-            {loading && <span className="spinner-border spinner-border-sm"></span>}
-            <span>Login</span>
+          <button className="btn btn-secondary btn-block signbtn" disabled={loading ? true : false}>
+            {loading ? (
+              <div className="spinner-border text-dark" role="status">
+                <span className="sr-only"></span>
+              </div>
+            ) : (
+              <span>Login</span>
+            )}
           </button>
         </div>
-        <div className="form-group">
-          {error && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {error.message}
-              </div>
-            </div>
-          )}
-        </div>
+        <div className="form-group">{error && <span className="badge bg-danger">{error.message}</span>}</div>
         <div className="form-group flexBox">
           <div className="line"></div> <div className="signtext">What new ? </div>
           <div className="line"></div>

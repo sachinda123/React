@@ -1,7 +1,5 @@
 import axios from "axios";
-// const API_URL = "http://localhost:3001/";
 import { API_URL } from "../config/url.config";
-
 export const FETCH_LIST_REQUEST = "FETCH_LIST_REQUEST";
 export const FETCH_LIST_SUCCESS = "FETCH_LIST_SUCCESS";
 export const FETCH_LIST_FAILURE = "FETCH_LIST_FAILURE";
@@ -36,8 +34,6 @@ export const getList = () => async (dispatch) => {
       }
     }
   } catch (error) {
-    console.log("error", error);
-
     dispatch({ type: FETCH_LIST_FAILURE, payload: error.response.data });
   }
 };
@@ -53,7 +49,7 @@ export const deleteList = (list) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.log("error", error);
+    console.log("error", error.response.data);
   }
 };
 
@@ -64,6 +60,6 @@ export const addListItem = (Item) => async (dispatch) => {
       await axioInstance.post(API_URL + "list/", Item);
     }
   } catch (error) {
-    console.log("error", error);
+    console.log("error", error.response.data);
   }
 };

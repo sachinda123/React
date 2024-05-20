@@ -7,14 +7,10 @@ export const SIGNIN_ERROR_RESET = "SIGNIN_ERROR_RESET";
 
 export const signup = (firstName, lastName, email, password) => async (dispatch) => {
   try {
-    const response = await axios.post(API_URL + "auth/signup", { firstName, lastName, email });
-
-    console.log("response", response.statusCode);
-
-    // dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
+    const response = await axios.post(API_URL + "auth/signup", { firstName, lastName, email, password });
+    dispatch({ type: "SIGNIN_SUCCESS", payload: null });
   } catch (error) {
-    console.log("error", error.message);
-    // dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+    dispatch({ type: "SIGNIN_FAILURE", payload: error.response.data });
   }
 };
 // export const logout = () => (dispatch) => {

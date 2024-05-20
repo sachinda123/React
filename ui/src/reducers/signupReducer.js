@@ -1,7 +1,6 @@
 import { SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNIN_ERROR_RESET } from "../actions/signupActions";
 
 const initialState = {
-  isLoggedIn: false,
   signSucess: false,
   error: null,
 };
@@ -11,22 +10,18 @@ const signupReducer = (state = initialState, action) => {
     case SIGNIN_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true,
-        user: action.payload,
+        signSucess: true,
         error: null,
       };
     case SIGNIN_FAILURE:
       return {
         ...state,
-        isLoggedIn: false,
-        user: null,
+        signSucess: false,
         error: action.payload,
       };
     case SIGNIN_ERROR_RESET:
       return {
         ...state,
-        isLoggedIn: false,
-        user: null,
         error: null,
       };
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,7 +9,7 @@ import { signup } from "../actions/signupActions";
 
 const Signin = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn, error } = useSelector((state) => state.auth);
+  const { signSucess, error } = useSelector((state) => state.signup);
   const [loading, setLoading] = useState(false);
   const form = useRef();
   const checkBtn = useRef();
@@ -20,6 +20,24 @@ const Signin = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [localError, setLocalError] = useState("");
 
+  useEffect(() => {
+    if (signSucess) {
+      setLoading(false);
+      return <Navigate to="/login" />;
+    }
+    if (error) {
+      setLoading(false);
+    }
+  }, [signSucess, error]);
+
+  console.log("signSucess", signSucess);
+  console.log("error", error);
+
+  if (signSucess) {
+    setLoading(false);
+    return <Navigate to="/login" />;
+  }
+
   const handlesignin = (e) => {
     setLoading(true);
     e.preventDefault();
@@ -28,25 +46,8 @@ const Signin = () => {
       setLoading(false);
     }
     dispatch(signup(firstName, lastName, email, password));
-
-    console.log("handlesignin");
-    // setLoading(true);
-    // form.current.validateAll();
-    // if (checkBtn.current.context._errors.length === 0) {
-    //   dispatch(login(username, password))
-    //     .then(() => {
-    //       setLoading(false);
-    //     })
-    //     .catch(() => {
-    //       setLoading(false);
-    //     });
-    // } else {
-    //   setLoading(false);
-    // }
+    // setLoading(false);
   };
-  if (isLoggedIn) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <div className="card card-container login">
@@ -147,9 +148,10 @@ const Signin = () => {
             )}
           </button>
         </div>
+        {error}
 
         {(error || localError) && (
-          <span class="badge bg-danger">
+          <span className="badge bg-danger">
             {error?.message}
             {localError}
           </span>
