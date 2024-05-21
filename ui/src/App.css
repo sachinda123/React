@@ -43,7 +43,7 @@
 }
 
 .container-image {
-  object-fit: cover;
+  object-fit: contain;
 }
 .wish-list-container {
   display: flex;
@@ -83,30 +83,6 @@
   font-size: 2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-.pagination {
-  display: inline-block;
-  display: flex;
-  justify-content: end;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 5px 35px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  border: 1px solid #ddd;
-}
-
-.pagination a.active {
-  background-color: #4caf50;
-  color: white;
-  border: 1px solid #4caf50;
-}
-
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
 }
 .nav-left {
   border-bottom-left-radius: 15px;
@@ -235,6 +211,8 @@
 }
 .wish-list-title {
   display: flex;
+  margin-top: 2rem !important;
+  font-weight: bold;
 }
 .button-selected {
   background-color: #000;
@@ -280,6 +258,57 @@
 .loder {
   margin-top: 10%;
 }
-.selectedbtn {
+
+tbody th {
+  background-color: #f1f1f1 !important;
+}
+thead th {
+  background-color: #848482 !important;
+}
+th {
+  border: 1px solid black !important;
+  height: 7rem !important;
+  text-align: center !important;
+}
+
+.pagination {
+  display: inline-block;
+  display: flex;
+  justify-content: end;
+}
+
+.pagination button {
+  width: 6rem;
+  color: black;
+  background-color: white;
+  float: left;
+  padding: 5px 35px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid black;
+}
+
+.pagination button.active {
   background-color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+}
+.pagination button:hover:not(.active) {
+  background-color: #ddd;
+}
+.selectedbtn {
+  background-color: #848482 !important;
+}
+
+.selectMenu select {
+  margin-top: 0.5rem;
+  width: 10rem;
+}
+
+.white-icon {
+  color: white;
+  cursor: pointer;
+}
+.higlight .bi {
+  cursor: pointer;
 }

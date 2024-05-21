@@ -75,7 +75,7 @@ const Menu = ({ selectedYear, handleChange, selectedRating, sortOrder, searchQue
               <option value="">All</option>
               {[...Array(11).keys()].map((rating) => (
                 <option key={rating} value={rating}>
-                  {rating}
+                  {rating} &lt; rate &lt;{rating + 1}
                 </option>
               ))}
             </select>

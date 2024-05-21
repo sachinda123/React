@@ -78,7 +78,7 @@ const WishList = () => {
               handleRowClick(movieId);
             }}
           >
-            <i className={`bi bi-check-circle${selectedList.includes(movieId) ? "-fill" : ""}`}></i>
+            <i className={`bi bi-check-circle${selectedList.includes(movieId) ? "-fill" : ""} fs-3`}></i>
           </div>
           <div className="col-2">
             <img src={imageApiUrl + "/w200" + movieData.poster_path} alt="" className="wish-list-img" />
@@ -87,8 +87,8 @@ const WishList = () => {
             {movieData.title} {new Date(movieData?.release_date).getFullYear()} {generateGenre(movieData?.genres || [])}
           </div>
           <div className="col-1 selected-icon">
-            <div className="rounded-circle bg-primary p-2">
-              <i className="bi bi-trash3 " onClick={() => handleDeleteMultiple([movieId])}></i>
+            <div className="rounded-circle bg-dark p-2">
+              <i className="bi bi-trash3 white-icon fs-3 " onClick={() => handleDeleteMultiple([movieId])}></i>
             </div>
           </div>
         </div>

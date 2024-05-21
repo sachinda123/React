@@ -36,6 +36,9 @@ export const getList = () => async (dispatch) => {
       }
     }
   } catch (error) {
+    if (error && error.response && error.response.status && error.response.status === 401) {
+      localStorage.removeItem("user");
+    }
     dispatch({ type: FETCH_LIST_FAILURE, payload: error.response.data });
   }
 };
@@ -51,6 +54,9 @@ export const deleteList = (list) => async (dispatch) => {
       });
     }
   } catch (error) {
+    if (error && error.response && error.response.status && error.response.status === 401) {
+      localStorage.removeItem("user");
+    }
     console.log("error", error.response.data);
   }
 };
@@ -64,8 +70,10 @@ export const addListItem = (Item) => async (dispatch) => {
     }
     dispatch({ type: FETCH_LIST_ADD_SUCCESS, payload: null });
   } catch (error) {
+    if (error && error.response && error.response.status && error.response.status === 401) {
+      localStorage.removeItem("user");
+    }
     console.log("error", error.response.data);
-
     dispatch({ type: FETCH_LIST_FAILURE, payload: error.response.data });
   }
 };
