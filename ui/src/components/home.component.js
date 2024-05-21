@@ -2,20 +2,27 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import { fetchMovies } from "../actions/movieActions";
+import { getList } from "../actions/listActions";
+import { logout } from "../actions/authActions";
+
 import MovieDetail from "../components/movieDetail.component";
 import MovieTable from "./movietable.component";
 import Menu from "./menu.component";
-import { fetchMovies } from "../actions/movieActions";
+
 import genres from "../config/genres.config";
-import { getList } from "../actions/listActions";
-import { logout } from "../actions/authActions";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { loading, movies, error } = useSelector((state) => state.movies);
+  const list = useSelector((state) => state.list);
+  const user = localStorage.getItem("user");
+
   const [movieId, setMovieId] = useState("");
   const [pageId, setPageId] = useState(1);
+  const [pageIdArr, setPageIdArr] = useState([1, 2]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
@@ -24,10 +31,6 @@ const Home = () => {
   const [searchButtonClicked, setSearchButtonClicked] = useState(false);
   const [selectedGenere, setSelectedGenere] = useState("");
   const [logo, setLog] = useState(false);
-
-  const { loading, movies, error } = useSelector((state) => state.movies);
-  const list = useSelector((state) => state.list);
-  const user = localStorage.getItem("user");
 
   useEffect(() => {
     dispatch(fetchMovies(pageId));
@@ -47,9 +50,7 @@ const Home = () => {
         if (sortOrder === "Asc") {
           return a.title.localeCompare(b.title);
         }
-        // else if (sortOrder === "Desc") {
         return b.title.localeCompare(a.title);
-        // }
       });
     }
     if (searchQuery) {
@@ -98,10 +99,27 @@ const Home = () => {
     return genre ? genre.name : null;
   };
 
-  const handlePageClick = (id) => {
-    console.log("page click", id);
+  const handlePageClick = (num) => {
+    let numbers = pageIdArr;
+    let maxNumber = Math.max(...numbers);
+    let minNumber = Math.min(...numbers);
 
-    //  setPageId(id);
+    if (num > 0) {
+      // increment
+      numbers.push(maxNumber + 1);
+      let minIndex = numbers.indexOf(minNumber);
+      numbers.splice(minIndex, 1);
+      setPageIdArr(numbers);
+      setPageId(pageId + 1);
+    } else {
+      // decrement
+      numbers.push(minNumber - 1);
+      let maxIndex = numbers.indexOf(maxNumber);
+      numbers.splice(maxIndex, 1);
+      numbers.sort((a, b) => a - b);
+      setPageIdArr(numbers);
+      setPageId(pageId - 1);
+    }
   };
 
   if (loading) {
@@ -176,16 +194,17 @@ const Home = () => {
             <MovieTable movieList={filteredMovies} handleClick={handleClick} getNameById={getNameById} />
             {!movieId && (
               <div className="pagination">
-                <button className="nav-left navigation" onClick={() => handlePageClick(-1)}>
+                <button className="nav-left navigation" key="left" onClick={() => handlePageClick(pageId - 1)}>
                   &laquo;
                 </button>
-                <button className="navigation middle" onClick={() => handlePageClick(1)}>
-                  1
-                </button>
-                <button className="navigation middle" onClick={() => handlePageClick(2)}>
-                  2
-                </button>
-                <button className="nav-right navigation" onClick={() => handlePageClick(1)}>
+
+                {pageIdArr.map((id) => (
+                  <button className={`navigation middle ${id === pageId ? "selectedbtn" : ""}`} key={id} onClick={() => handlePageClick(id)}>
+                    {id}
+                  </button>
+                ))}
+
+                <button className="nav-right navigation" key="right" onClick={() => handlePageClick(pageId + 1)}>
                   &raquo;
                 </button>
               </div>

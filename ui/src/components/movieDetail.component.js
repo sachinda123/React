@@ -63,11 +63,26 @@ const MovieDetail = ({ id, handle }) => {
     );
   };
 
+  const getYear = () => {
+    if (movie && movie?.release_date) {
+      return new Date(movie?.release_date).getFullYear();
+    }
+    return "";
+  };
+
   useEffect(() => {
     dispatch(getList());
   }, [successfully_add, dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="text-center loder">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading</span>
+        </div>
+      </div>
+    );
+
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -85,7 +100,7 @@ const MovieDetail = ({ id, handle }) => {
         <h2>{movie?.title}</h2>
         <div className="row">
           <div className="col-10">
-            <h1>{new Date(movie?.release_date).getFullYear()}</h1>
+            <h1>{getYear()}</h1>
           </div>
           <div className="col-2 badge-add">
             <button className="wish-list-btn" onClick={confirmAddToWishList} disabled={!loginUser ? true : ""}>

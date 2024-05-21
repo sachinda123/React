@@ -87,7 +87,7 @@ const WishList = () => {
             {movieData.title} {new Date(movieData?.release_date).getFullYear()} {generateGenre(movieData?.genres || [])}
           </div>
           <div className="col-1 selected-icon">
-            <div class="rounded-circle bg-primary p-2">
+            <div className="rounded-circle bg-primary p-2">
               <i className="bi bi-trash3 " onClick={() => handleDeleteMultiple([movieId])}></i>
             </div>
           </div>
