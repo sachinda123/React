@@ -26,7 +26,7 @@ const WishList = () => {
         {genere?.map((gener, index) => {
           if (index === 0) {
             return "  -  " + gener.name;
-          } else if (genere.length - 1 == index) {
+          } else if (genere.length - 1 === index) {
             return gener.name;
           } else {
             return gener.name + "/";
@@ -66,7 +66,7 @@ const WishList = () => {
           </button>
           {">"} Wish List
         </div>
-        <button className={`rounded-button${selectedList.length > 0 ? " button-selected" : ""}`} onClick={() => handleDeleteMultiple(selectedList)} disabled={selectedList.length == 0 ? true : false}>
+        <button className={`rounded-button${selectedList.length > 0 ? " button-selected" : ""}`} onClick={() => handleDeleteMultiple(selectedList)} disabled={selectedList.length === 0 ? true : false}>
           Remove selected
         </button>
       </div>

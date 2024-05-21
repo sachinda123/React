@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleMovie } from "../actions/movieActions";
@@ -40,7 +40,7 @@ const MovieDetail = ({ id, handle }) => {
     return (
       <p className="genre">
         {genres?.map((genre, index) => {
-          if (genres.length - 1 == index) {
+          if (genres.length - 1 === index) {
             return genre.name;
           } else {
             return genre.name + " / ";
@@ -50,7 +50,6 @@ const MovieDetail = ({ id, handle }) => {
     );
   };
   const confirmAddToWishList = () => {
-    // if (loginUser) {
     dispatch(
       addListItem({
         movieId: movie.id,
@@ -62,13 +61,11 @@ const MovieDetail = ({ id, handle }) => {
         },
       })
     );
-    // } else {
-    // }
   };
 
   useEffect(() => {
     dispatch(getList());
-  }, [successfully_add]);
+  }, [successfully_add, dispatch]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

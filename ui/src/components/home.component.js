@@ -46,9 +46,10 @@ const Home = () => {
       filtered = filtered.sort((a, b) => {
         if (sortOrder === "Asc") {
           return a.title.localeCompare(b.title);
-        } else if (sortOrder === "Desc") {
-          return b.title.localeCompare(a.title);
         }
+        // else if (sortOrder === "Desc") {
+        return b.title.localeCompare(a.title);
+        // }
       });
     }
     if (searchQuery) {
@@ -57,7 +58,7 @@ const Home = () => {
     if (selectedGenere) {
       filtered = filtered.filter((movie) => {
         if (movie.genre_ids.length > 0) {
-          return movie.genre_ids[0] == selectedGenere;
+          return movie.genre_ids[0] === Number(selectedGenere);
         }
         return false;
       });
@@ -89,6 +90,7 @@ const Home = () => {
       case "genre":
         setSelectedGenere(event.target.value);
         break;
+      default:
     }
   };
   const getNameById = (id) => {
@@ -103,7 +105,13 @@ const Home = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="text-center loder">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading</span>
+        </div>
+      </div>
+    );
   }
   if (error) {
     return <div>Error: {error.message}</div>;

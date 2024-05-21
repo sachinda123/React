@@ -92,9 +92,7 @@ const Menu = ({ selectedYear, handleChange, selectedRating, sortOrder, searchQue
                 handleChange("year", e);
               }}
             >
-              <option value="" selected>
-                All
-              </option>
+              <option value="">All</option>
               {getLastTenYears().map((year) => (
                 <option key={year} value={year}>
                   {year}
@@ -114,9 +112,7 @@ const Menu = ({ selectedYear, handleChange, selectedRating, sortOrder, searchQue
                 handleChange("orderby", e);
               }}
             >
-              <option value="Asc" selected>
-                ASC
-              </option>
+              <option value="Asc">ASC</option>
               <option value="Desc">Desc</option>
             </select>
           </div>
