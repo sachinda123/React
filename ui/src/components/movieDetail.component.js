@@ -2,20 +2,19 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleMovie } from "../actions/movieActions";
-import { getList } from "../actions/listActions";
-import { addListItem, errorReset } from "../actions/listActions";
+import { getList } from "../actions/listGetActions";
+import { addListItem, addListResetError } from "../actions/listAddActions";
 import { imageApiUrl } from "../config/url.config";
 
 const MovieDetail = ({ id, handle }) => {
   const dispatch = useDispatch();
   const { movie, loading, error } = useSelector((state) => state.movies);
-  const { error: listError, successfully_add } = useSelector((state) => state.list);
+  const { error: listError, added: listAdded } = useSelector((state) => state.listadd);
   const loginUser = localStorage.getItem("user");
 
   useEffect(() => {
+    dispatch(addListResetError());
     dispatch(getSingleMovie(id));
-    dispatch(getList());
-    dispatch(errorReset());
   }, [dispatch, id]);
 
   const generateRating = (vote) => {
@@ -72,7 +71,7 @@ const MovieDetail = ({ id, handle }) => {
 
   useEffect(() => {
     dispatch(getList());
-  }, [successfully_add, dispatch]);
+  }, [listAdded]);
 
   if (loading)
     return (
@@ -108,7 +107,7 @@ const MovieDetail = ({ id, handle }) => {
             </button>
             {!loginUser && <span className="badge bg-info">log before add </span>}
             {listError && <span className="badge bg-success lbl">{listError && listError.message}</span>}
-            {successfully_add && <span className="badge bg-success lbl">successfuly added</span>}
+            {listAdded && <span className="badge bg-success lbl">successfuly added</span>}
           </div>
         </div>
         <div className="genre-container">

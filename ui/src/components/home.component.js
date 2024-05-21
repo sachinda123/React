@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchMovies } from "../actions/movieActions";
-import { getList } from "../actions/listActions";
+import { getList } from "../actions/listGetActions";
+
 import { logout } from "../actions/authActions";
 
 import MovieDetail from "../components/movieDetail.component";
@@ -17,7 +18,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const { loading, movies, error } = useSelector((state) => state.movies);
-  const list = useSelector((state) => state.list);
+  const list = useSelector((state) => state.listget);
   const user = localStorage.getItem("user");
 
   const [movieId, setMovieId] = useState("");

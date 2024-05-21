@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getList, deleteList, errorReset } from "../actions/listActions";
+import { getList } from "../actions/listGetActions";
+import { deleteList, errorReset } from "../actions/listDeleteActions";
+
 import { imageApiUrl } from "../config/url.config";
 
 const WishList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, data, delete_error } = useSelector((state) => state.list);
+  const { loading, deleted, error } = useSelector((state) => state.listdelete);
+  const { data } = useSelector((state) => state.listget);
+
   const [wishList, setWishList] = useState([]);
   const [selectedList, setSelectedList] = useState([]);
 
   useEffect(() => {
     dispatch(getList());
-  }, [dispatch]);
+  }, [dispatch, data.length]);
 
   useEffect(() => {
     setWishList(data);
-  }, [data.length, selectedList.length]);
+  }, [selectedList.length]);
 
   const generateGenre = (genere) => {
     return (
@@ -73,7 +77,7 @@ const WishList = () => {
           )}
         </button>
       </div>
-      {delete_error && delete_error.message ? <span className="badge bg-danger">{delete_error.message}</span> : ""}
+      {error && error.message ? <span className="badge bg-danger">{error.message}</span> : ""}
 
       {wishList.length == 0 ? <span className="badge bg-info">List Empty please add more to list</span> : ""}
 
