@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/18</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/18</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,94 +108,97 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { Op } = require("sequelize");
 module.exports = {
-    create: <span class="fstat-no" title="function not covered" >as</span>ync (data, model) =&gt; {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const created = <span class="cstat-no" title="statement not covered" >await model.create(data);</span>
-<span class="cstat-no" title="statement not covered" >            return created;</span>
+    create: async (data, model) =&gt; {
+        try {
+            const created = await model.create(data);
+            return created;
         }
         catch (error) {
 <span class="cstat-no" title="statement not covered" >            throw error;</span>
         }
     },
-    getAll: <span class="fstat-no" title="function not covered" >as</span>ync (model) =&gt; {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const allRecords = <span class="cstat-no" title="statement not covered" >await model.findAll();</span>
-<span class="cstat-no" title="statement not covered" >            return allRecords;</span>
+    getAll: async (model) =&gt; {
+        try {
+            const allRecords = await model.findAll();
+            return allRecords;
         }
         catch (error) {
 <span class="cstat-no" title="statement not covered" >            throw error;</span>
         }
     },
-    deletebyIds: <span class="fstat-no" title="function not covered" >as</span>ync (ids, model) =&gt; {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const record = <span class="cstat-no" title="statement not covered" >await model.destroy({</span>
+    deletebyIds: async (ids, model) =&gt; {
+        try {
+            const record = await model.destroy({
                 where: {
-                    id: {
+                    movieId: {
                         [Op.in]: ids,
                     },
                 },
             });
+            return;
         }
         catch (error) {
-<span class="cstat-no" title="statement not covered" >            throw error;</span>
+            throw error;
         }
     },
-    checkExist: <span class="fstat-no" title="function not covered" >as</span>ync (condition, model) =&gt; {
-        const record = <span class="cstat-no" title="statement not covered" >await model.findOne(condition);</span>
-<span class="cstat-no" title="statement not covered" >        return record;</span>
+    checkExist: async (condition, model) =&gt; {
+        const record = await model.findOne(condition);
+        return record;
     },
-    countExist: <span class="fstat-no" title="function not covered" >as</span>ync (condition, model) =&gt; {
-        const record = <span class="cstat-no" title="statement not covered" >await model.findAll(condition);</span>
-<span class="cstat-no" title="statement not covered" >        return record;</span>
+    countExist: async (condition, model) =&gt; {
+        const record = await model.findAll(condition);
+        return record;
     },
 };
 &nbsp;</pre></td></tr></table></pre>
@@ -205,7 +208,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-05-20T08:43:19.152Z
+                at 2024-05-21T08:32:07.111Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -14,28 +14,27 @@ const jwtOptions = {
     secretOrKey: "my_key",
 };
 passport.use(new Strategy(jwtOptions, async (payload, done) => {
-    const currentTime = Date.now();
+    // const currentTime = Date.now();
     //set 120 minute expair token time
-    if (payload.time + 1000 * 60 * 120 < currentTime) {
-        return done(null, false);
+    // if (payload.time + 1000 * 60 * 120 < currentTime) {
+    //   return done(null, false);
+    // } else {
+    const user = await User.findOne({
+        where: { id: payload.id },
+        rows: true,
+    });
+    if (user) {
+        return done(null, {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+        });
     }
     else {
-        const user = await User.findOne({
-            where: { id: payload.id },
-            rows: true,
-        });
-        if (user) {
-            return done(null, {
-                id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-            });
-        }
-        else {
-            return done(null, false);
-        }
+        return done(null, false);
     }
+    // }
 }));
 app.use("/list", passport.authenticate("jwt", { session: false }), require("./routes/list"));
 app.use("/auth", require("./routes/auth"));

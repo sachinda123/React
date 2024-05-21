@@ -24,7 +24,7 @@ module.exports = {
         try {
             const record = await model.destroy({
                 where: {
-                    id: {
+                    movieId: {
                         [Op.in]: ids,
                     },
                 },

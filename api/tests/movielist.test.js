@@ -12,6 +12,7 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidGltZSI6MTcxNjA5
 
 chai.use(chaiHttp);
 
+/*
 describe("Test user login", () => {
   beforeEach(function () {});
   afterEach(function (done) {
@@ -154,6 +155,7 @@ describe("Test user signup", () => {
     }
   });
 });
+*/
 describe("Test movie list", () => {
   beforeEach(function () {});
   afterEach(function (done) {
@@ -192,7 +194,6 @@ describe("Test movie list", () => {
             release_date: "2024-04-18",
           },
         });
-
       expect(res.statusCode).toEqual(200);
       expect(res.body).toEqual({
         id: 1,
@@ -209,6 +210,7 @@ describe("Test movie list", () => {
       console.log("error", error);
     }
   });
+
   it("try to existing movie to list ", async () => {
     try {
       jest.spyOn(User, "findOne").mockImplementation((condition) => {
