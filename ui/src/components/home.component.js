@@ -105,20 +105,20 @@ const Home = () => {
     let minNumber = Math.min(...numbers);
 
     if (num > 0) {
-      // increment
       numbers.push(maxNumber + 1);
       let minIndex = numbers.indexOf(minNumber);
       numbers.splice(minIndex, 1);
       setPageIdArr(numbers);
       setPageId(pageId + 1);
     } else {
-      // decrement
-      numbers.push(minNumber - 1);
-      let maxIndex = numbers.indexOf(maxNumber);
-      numbers.splice(maxIndex, 1);
-      numbers.sort((a, b) => a - b);
-      setPageIdArr(numbers);
-      setPageId(pageId - 1);
+      if (pageId > 1) {
+        numbers.push(minNumber - 1);
+        let maxIndex = numbers.indexOf(maxNumber);
+        numbers.splice(maxIndex, 1);
+        numbers.sort((a, b) => a - b);
+        setPageIdArr(numbers);
+        setPageId(pageId - 1);
+      }
     }
   };
 
@@ -194,7 +194,7 @@ const Home = () => {
             <MovieTable movieList={filteredMovies} handleClick={handleClick} getNameById={getNameById} />
             {!movieId && (
               <div className="pagination">
-                <button className="nav-left navigation" key="left" onClick={() => handlePageClick(pageId - 1)}>
+                <button className="nav-left navigation" key="left" onClick={() => handlePageClick(-1)}>
                   &laquo;
                 </button>
 
@@ -204,7 +204,7 @@ const Home = () => {
                   </button>
                 ))}
 
-                <button className="nav-right navigation" key="right" onClick={() => handlePageClick(pageId + 1)}>
+                <button className="nav-right navigation" key="right" onClick={() => handlePageClick(+1)}>
                   &raquo;
                 </button>
               </div>
