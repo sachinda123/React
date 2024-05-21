@@ -21,20 +21,11 @@ const Signin = () => {
   const [localError, setLocalError] = useState("");
 
   useEffect(() => {
-    // if (signSucess) {
-    //   setLoading(false);
-    //   return <Navigate to="/login" />;
-    // }
     if (localError) {
       setLoading(false);
     }
   }, [localError]);
 
-  // if (error) {
-  //   setLoading(false);
-  // }
-
-  // console.log("signSucess", signSucess);
   if (signSucess) {
     return <Navigate to="/login" />;
   }

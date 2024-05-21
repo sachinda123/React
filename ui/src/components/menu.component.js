@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 const Menu = ({ selectedYear, handleChange, selectedRating, sortOrder, searchQuery, genres, selectedGenere }) => {
   useEffect(() => {}, []);

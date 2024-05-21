@@ -11,6 +11,7 @@ const listDeleteReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        deleted: false,
       };
     case DELETE_LIST_SUCCESS:
       return {

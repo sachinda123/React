@@ -13,16 +13,17 @@ const WishList = () => {
   const { loading, deleted, error } = useSelector((state) => state.listdelete);
   const { data } = useSelector((state) => state.listget);
 
-  const [wishList, setWishList] = useState([]);
+  // const [wishList, setWishList] = useState([]);
   const [selectedList, setSelectedList] = useState([]);
 
   useEffect(() => {
     dispatch(getList());
-  }, [dispatch, data.length]);
+    // setWishList(data);
+  }, [dispatch, loading, deleted]);
 
-  useEffect(() => {
-    setWishList(data);
-  }, [selectedList.length]);
+  // useEffect(() => {
+  //   setWishList(data);
+  // }, [selectedList.length]);
 
   const generateGenre = (genere) => {
     return (
@@ -53,6 +54,7 @@ const WishList = () => {
     dispatch(deleteList(list));
     dispatch(getList());
   };
+
   return (
     <div className="container">
       <div className="wish-list-menu">
@@ -79,9 +81,9 @@ const WishList = () => {
       </div>
       {error && error.message ? <span className="badge bg-danger">{error.message}</span> : ""}
 
-      {wishList.length == 0 ? <span className="badge bg-info">List Empty please add more to list</span> : ""}
+      {data.length == 0 ? <span className="badge bg-info">List Empty please add more to list</span> : ""}
 
-      {wishList.map(({ movieId, movieData }, index) => (
+      {data.map(({ movieId, movieData }, index) => (
         <div className="row higlight" key={index}>
           <div
             className="col-1 selected-icon"

@@ -25,6 +25,7 @@ Note:
 - All documents are located in the `document` folder, including the answer sheet and Postman collection.
 - Not all functions are covered by test cases; only samples are done.
 - User passwords are stored as plain text for testing purposes.
+- all ui configuration ui/src/config
 
 You can use the following credentials to log in:
 
