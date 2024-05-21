@@ -5,6 +5,7 @@ export const FETCH_LIST_SUCCESS = "FETCH_LIST_SUCCESS";
 export const FETCH_LIST_FAILURE = "FETCH_LIST_FAILURE";
 export const FETCH_LIST_ADD_SUCCESS = "FETCH_LIST_ADD_SUCCESS";
 export const FETCH_LIST_RESET_ERROR = "FETCH_LIST_RESET_ERROR";
+export const LIST_DELETE_ERROR = "LIST_DELETE_ERROR";
 
 export const getAxioInstance = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -57,7 +58,7 @@ export const deleteList = (list) => async (dispatch) => {
     if (error && error.response && error.response.status && error.response.status === 401) {
       localStorage.removeItem("user");
     }
-    console.log("error", error.response.data);
+    dispatch({ type: LIST_DELETE_ERROR, payload: error.response.data });
   }
 };
 

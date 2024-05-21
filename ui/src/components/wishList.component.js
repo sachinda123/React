@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getList, deleteList } from "../actions/listActions";
+import { getList, deleteList, errorReset } from "../actions/listActions";
 import { imageApiUrl } from "../config/url.config";
 
 const WishList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, data, error } = useSelector((state) => state.list);
+  const { loading, data, delete_error } = useSelector((state) => state.list);
   const [wishList, setWishList] = useState([]);
   const [selectedList, setSelectedList] = useState([]);
 
@@ -36,6 +36,7 @@ const WishList = () => {
     );
   };
   const handleRowClick = (movieId) => {
+    dispatch(errorReset());
     if (selectedList.includes(movieId)) {
       setSelectedList(selectedList.filter((selectedId) => selectedId !== movieId));
     } else {
@@ -43,15 +44,11 @@ const WishList = () => {
       setSelectedList(newList);
     }
   };
-
   const handleDeleteMultiple = (list) => {
+    dispatch(errorReset());
     dispatch(deleteList(list));
     dispatch(getList());
   };
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
   return (
     <div className="container">
       <div className="wish-list-menu">
@@ -67,9 +64,19 @@ const WishList = () => {
           {">"} Wish List
         </div>
         <button className={`rounded-button${selectedList.length > 0 ? " button-selected" : ""}`} onClick={() => handleDeleteMultiple(selectedList)} disabled={selectedList.length === 0 ? true : false}>
-          Remove selected
+          {loading ? (
+            <div className="spinner-border text-dark" role="status">
+              <span className="sr-only"></span>
+            </div>
+          ) : (
+            <span>Remove selected</span>
+          )}
         </button>
       </div>
+      {delete_error && delete_error.message ? <span className="badge bg-danger">{delete_error.message}</span> : ""}
+
+      {wishList.length == 0 ? <span className="badge bg-info">List Empty please add more to list</span> : ""}
+
       {wishList.map(({ movieId, movieData }, index) => (
         <div className="row higlight" key={index}>
           <div

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { signup } from "../actions/signupActions";
+import { signup, clearMsg } from "../actions/signupActions";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -21,24 +21,26 @@ const Signin = () => {
   const [localError, setLocalError] = useState("");
 
   useEffect(() => {
-    if (signSucess) {
+    // if (signSucess) {
+    //   setLoading(false);
+    //   return <Navigate to="/login" />;
+    // }
+    if (localError) {
       setLoading(false);
-      return <Navigate to="/login" />;
     }
-    if (error) {
-      setLoading(false);
-    }
-  }, [signSucess, error]);
+  }, [localError]);
 
-  console.log("signSucess", signSucess);
-  console.log("error", error);
+  // if (error) {
+  //   setLoading(false);
+  // }
 
+  // console.log("signSucess", signSucess);
   if (signSucess) {
-    setLoading(false);
     return <Navigate to="/login" />;
   }
 
   const handlesignin = (e) => {
+    // dispatch(clearMsg());
     setLoading(true);
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -46,7 +48,6 @@ const Signin = () => {
       setLoading(false);
     }
     dispatch(signup(firstName, lastName, email, password));
-    // setLoading(false);
   };
 
   return (
@@ -65,7 +66,9 @@ const Signin = () => {
             required
             onChange={(e) => {
               setFirstName(e.target.value);
-              if (localError) {
+              if (localError || error) {
+                dispatch(clearMsg());
+
                 setLocalError("");
               }
             }}
@@ -80,8 +83,9 @@ const Signin = () => {
             value={lastName}
             onChange={(e) => {
               setLastName(e.target.value);
-              if (localError) {
+              if (localError || error) {
                 setLocalError("");
+                dispatch(clearMsg());
               }
             }}
           />
@@ -97,8 +101,9 @@ const Signin = () => {
             required
             onChange={(e) => {
               setEmail(e.target.value);
-              if (localError) {
+              if (localError || error) {
                 setLocalError("");
+                dispatch(clearMsg());
               }
             }}
           />
@@ -114,8 +119,9 @@ const Signin = () => {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
-              if (localError) {
+              if (localError || error) {
                 setLocalError("");
+                dispatch(clearMsg());
               }
             }}
           />
@@ -130,8 +136,9 @@ const Signin = () => {
             value={confirmPassword}
             onChange={(e) => {
               setConfirmPassword(e.target.value);
-              if (localError) {
+              if (localError || error) {
                 setLocalError("");
+                dispatch(clearMsg());
               }
             }}
           />
@@ -148,11 +155,10 @@ const Signin = () => {
             )}
           </button>
         </div>
-        {error}
 
         {(error || localError) && (
           <span className="badge bg-danger">
-            {error?.message}
+            {error && error?.message}
             {localError}
           </span>
         )}

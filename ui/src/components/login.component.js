@@ -88,18 +88,16 @@ const Login = () => {
           <div className="line"></div> <div className="signtext">What new ? </div>
           <div className="line"></div>
         </div>
-        <div className="form-group">
-          <button
-            className="btn btn-secondary btn-block signbtn"
-            onClick={() => {
-              return navigate(`/signin`);
-            }}
-          >
-            <span>Sign Up</span>
-          </button>
-        </div>
+
         <CheckButton style={{ display: "none" }} ref={checkBtn} />
       </Form>
+      <div className="form-group">
+        <a href="/signin">
+          <button className="btn btn-secondary btn-block signbtn">
+            <span>Sign Up</span>
+          </button>
+        </a>
+      </div>
     </div>
   );
 };

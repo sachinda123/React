@@ -1,4 +1,4 @@
-import { SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNIN_ERROR_RESET } from "../actions/signupActions";
+import { SIGNUP_SUCCESS, SIGNUP_FAILURE, SIGNUP_ERROR_RESET } from "../actions/signupActions";
 
 const initialState = {
   signSucess: false,
@@ -7,19 +7,19 @@ const initialState = {
 
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SIGNIN_SUCCESS:
+    case SIGNUP_SUCCESS:
       return {
         ...state,
         signSucess: true,
         error: null,
       };
-    case SIGNIN_FAILURE:
+    case SIGNUP_FAILURE:
       return {
         ...state,
         signSucess: false,
         error: action.payload,
       };
-    case SIGNIN_ERROR_RESET:
+    case SIGNUP_ERROR_RESET:
       return {
         ...state,
         error: null,

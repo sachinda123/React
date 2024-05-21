@@ -245,7 +245,7 @@
 }
 
 .login {
-  margin-top: 15%;
+  margin-top: 10%;
 }
 .login-user {
   display: flex;
@@ -311,4 +311,9 @@ th {
 }
 .higlight .bi {
   cursor: pointer;
+}
+
+.login .form-group label {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }

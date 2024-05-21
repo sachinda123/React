@@ -70,7 +70,7 @@ router.delete("/", async (req: TypedRequestBody<DeleteIds>, res: Response) => {
     const userId = req.user.id;
     const actualRecordCount = await countExist({ where: { [Op.and]: [{ movieId: { [Op.in]: deleteList } }, { userId: userId }] } }, List);
     if (deleteList.length !== actualRecordCount.length) {
-      return sendResponse(res, 500, { message: "All list Ids not valied" }, true);
+      return sendResponse(res, 400, { message: "All list Ids not valied" }, true);
     }
     await deletebyIds(deleteList, List);
     return sendResponse(res, 200, { message: "deleted" }, true);
