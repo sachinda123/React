@@ -58,13 +58,16 @@
 }
 
 .movie-detail-image {
-  border: #454545 2px solid;
-  padding: 1rem;
+  border: #f0efed 2px solid;
   margin-top: 1rem;
 }
 
 .movie-detail-image img {
   width: -webkit-fill-available;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .movie-detail-right {
   padding-left: 1rem;
@@ -316,4 +319,25 @@ th {
 .login .form-group label {
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.table > tbody tr {
+  vertical-align: middle;
+}
+
+.table > thead tr {
+  vertical-align: middle;
+}
+.reverseButton {
+  font-weight: 600;
+}
+.bd-title {
+  color: #c9c9c9;
+}
+
+.synopis {
+  font-style: italic;
+  font-weight: 400;
+  color: #a3a3a3;
 }

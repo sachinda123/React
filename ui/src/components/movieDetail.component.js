@@ -91,7 +91,7 @@ const MovieDetail = ({ id, handle }) => {
         <button onClick={handle} className="reverseButton">
           Home
         </button>
-        {">"} {movie?.title}
+        {">"} <span className="bd-title">{movie?.title}</span>
         <div className="movie-detail-image">
           <img src={imageApiUrl + "/original" + movie?.poster_path} alt="" className="dtl-img" />
         </div>
@@ -125,7 +125,7 @@ const MovieDetail = ({ id, handle }) => {
           <div className="col-2 star">{movie && movie.vote_average && generateRating(movie.vote_average.toFixed(1))}</div>
         </div>
         <div className="title">Synopis</div>
-        <p>{movie?.overview}</p>
+        <p className="synopis">{movie?.overview}</p>
       </div>
     </div>
   );
